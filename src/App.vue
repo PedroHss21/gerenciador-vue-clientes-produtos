@@ -40,12 +40,20 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 
 export default {
-  name: 'App',
 
-  data: () => ({
-    //
-  }),
+  methods: {
+    ...mapActions(['loginUser']),
+
+    performLogin() {
+      const credentials = { email: this.email, senha: this.password };
+      this.loginUser(credentials)
+        .then(() => {
+          this.$router.push('/');
+        })
+    },
+  },
 };
 </script>

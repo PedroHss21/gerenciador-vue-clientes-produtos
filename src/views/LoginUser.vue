@@ -76,8 +76,9 @@ export default {
          this.$router.push('/'); // Redirecionar para a página inicial após o login
     })
     .catch(error => {
-      // Usar nextTick para garantir que a Vue atualize o DOM antes de definir a nova mensagem
-      this.$nextTick(() => {
+      this.errorMessage = '';
+      // garantir que a Vue atualize o DOM antes de definir a nova mensagem
+      this.$nextTick(() => { 
         this.errorMessage = error.response?.data?.message || "Erro na autenticação";
       });
     });
