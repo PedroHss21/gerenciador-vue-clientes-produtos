@@ -22,12 +22,12 @@ export default new Router({
             component: LoginUser
         },
         {
-            path: '/clients',
+            path: '/clientes',
             name: 'clientManager',
             component: ClientManager
         },
         {
-            path: '/products',
+            path: '/produtos',
             name: 'productManager',
             component: ProductManager
         }
