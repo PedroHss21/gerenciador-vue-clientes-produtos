@@ -34,5 +34,22 @@ export default {
                     reject(error);
                 });
         });
+    },
+
+    fetchClientes({ commit }) {
+        return new Promise((resolve, reject) => {
+            api.get('/clientes', {
+                headers: {
+                    'Authorization': localStorage.getItem('userToken')
+                }
+            })
+                .then(response => {
+                    commit('SET_CLIENTES', response.data);
+                    resolve(response);
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
     }
 };
