@@ -13,5 +13,11 @@ export default {
     CLEAR_USER_DATA(state) {
         state.user = null;
         state.token = null;
+    },
+
+    // Atualiza o estado com a lista de clientes
+    SET_CLIENTES(state, clientes) {
+        state.clientes = clientes;
     }
+
 };
