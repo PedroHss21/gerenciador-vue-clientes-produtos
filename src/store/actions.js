@@ -1,4 +1,6 @@
 import api from '@/services/api/api.js';
+import axios from 'axios';
+
 
 export default {
     loginUser({ commit }, credentials) {
@@ -7,6 +9,7 @@ export default {
                 .then(response => {
                     const token = response.data.token;
                     const user = response.data.user;
+                    localStorage.setItem('userToken', token);
                     commit('SET_TOKEN', token);
                     commit('SET_USER', user);
                     resolve(response);
@@ -37,19 +40,60 @@ export default {
     },
 
     fetchClientes({ commit }) {
-        return new Promise((resolve, reject) => {
-            api.get('/clientes', {
-                headers: {
-                    'Authorization': localStorage.getItem('userToken')
-                }
+        return axios.get('http://localhost:3400/clientes', {
+            headers: {
+                'Authorization': localStorage.getItem('userToken')
+            }
+        })
+            .then(response => {
+                commit('SET_CLIENTES', response.data);
             })
-                .then(response => {
-                    commit('SET_CLIENTES', response.data);
-                    resolve(response);
-                })
-                .catch(error => {
-                    reject(error);
-                });
-        });
+            .catch(error => {
+                console.error('Erro ao buscar clientes:', error);
+            });
+    },
+
+    createCliente({ commit }, clienteData) {
+        return axios.post('http://localhost:3400/clientes', clienteData, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('userToken')
+            }
+        })
+            .then(response => {
+                commit('ADD_CLIENTE', response.data);
+            })
+            .catch(error => {
+                console.error('Erro ao criar cliente:', error);
+            });
+    },
+
+    updateCliente({ commit }, clienteData) {
+        return axios.put(`http://localhost:3400/clientes/${clienteData.id}`, clienteData, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('userToken')
+            }
+        })
+            .then(response => {
+                commit('UPDATE_CLIENTE', response.data);
+            })
+            .catch(error => {
+                console.error('Erro ao atualizar cliente:', error);
+            });
+    },
+
+    deleteCliente({ commit }, clienteId) {
+        return axios.delete(`http://localhost:3400/clientes/${clienteId}`, {
+            headers: {
+                'Authorization': localStorage.getItem('userToken')
+            }
+        })
+            .then(() => {
+                commit('DELETE_CLIENTE', clienteId);
+            })
+            .catch(error => {
+                console.error('Erro ao deletar cliente:', error);
+            });
     }
-};
+}
