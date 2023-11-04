@@ -55,6 +55,8 @@
         dialog: false,
         valid: true,
         editMode: false,
+        deleteDialog: false,
+        selectedCliente: null,
         cliente: {
           nome: '',
           cpfOuCnpj: '',

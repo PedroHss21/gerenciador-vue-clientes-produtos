@@ -50,7 +50,7 @@
 
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn icon v-bind="attrs" v-on="on" @click="deletarCliente(item)">
+                    <v-btn icon v-bind="attrs" v-on="on" @click="openDeleteDialog(item)">
                       <v-icon color='primary'>mdi-delete-outline</v-icon>
                     </v-btn>
                   </template>
@@ -61,6 +61,20 @@
             </tr>
           </template>
         </v-data-table>
+        <!-- Diálogo de Confirmação de Exclusão -->
+        <v-dialog v-model="deleteDialog" persistent max-width="500px">
+          <v-card>
+            <v-card-title>Excluir Cliente</v-card-title>
+            <v-card-text>
+              Você tem certeza que deseja excluir o cliente <strong>{{ selectedCliente?.nome }}</strong>?
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="grey" text @click="closeDeleteDialog">Cancelar</v-btn>
+              <v-btn color="red" text @click="deletarCliente">Excluir</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-container>
     </v-col>
   </v-row>
@@ -69,7 +83,7 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 import ClientManager from '../../views/ClientManager.vue';
-
+import axios from 'axios';
 
 export default {
   components: {
@@ -77,6 +91,8 @@ export default {
   },
   data() {
     return {
+      deleteDialog: false,
+      selectedCliente: null,
       loading: false,
       headers: [
         { text: 'ID', value: 'id' },
@@ -97,21 +113,29 @@ export default {
     openNewClientDialog() {
       this.$refs.clientManager.openDialog();
     },
-    openDialog(cliente = null) {
-  this.editMode = !!cliente;
-  this.dialog = true;
-  if (cliente) {
-    this.cliente = { ...cliente };
-  } else {
-    this.cliente = this.getDefaultCliente();
-  }
-},
     editarCliente(cliente) {
       this.$refs.clientManager.openDialog(cliente);
     },
-    // eslint-disable-next-line no-unused-vars
-    deletarCliente(cliente) {
-      // TODO: Implementar a lógica de exclusão do cliente
+    openDeleteDialog(cliente) {
+      this.selectedCliente = cliente;
+      this.deleteDialog = true;
+    },
+    closeDeleteDialog() {
+      this.deleteDialog = false;
+      this.selectedCliente = null;
+    },
+    deletarCliente() {
+      if (this.selectedCliente) {
+        axios.delete(`/api/clientes/${this.selectedCliente.id}`)
+          .then(() => {
+            this.deleteCliente(this.selectedCliente.id);
+            this.closeDeleteDialog();
+          })
+          .catch(error => {
+            console.error('Erro ao excluir o cliente:', error);
+            alert('Erro ao excluir o cliente.');
+          });
+      }
     },
     formatDate(value) {
       if (value) {
@@ -136,5 +160,4 @@ export default {
 .font-weight-normal {
   font-weight: normal; /* Remove o negrito do texto */
 }
-
 </style>
