@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <!-- Barra de Navegação -->
-    <v-app-bar v-if="$route.path !== '/login'" app color="primary" dark class="custom-app-bar">
+    <v-app-bar v-if="$route.path !== '/login'" app color="primary" dark>
 
       <!-- Espaçamento para alinhar à esquerda -->
       <v-spacer></v-spacer>
@@ -70,7 +70,7 @@ export default {
           },
 
       goToHelpSite() {
-        window.open('https://ajuda.alterdata.com.br', '_blank');
+        window.open('https://ajuda-homologacao.alterdata.com.br/x/_oA6Cg', '_blank');
       },
         },
 

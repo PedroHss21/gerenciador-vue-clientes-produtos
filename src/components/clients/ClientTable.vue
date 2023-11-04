@@ -1,11 +1,11 @@
 <template>
   <v-row justify="center">
-    <v-col cols="5" md="10" lg="18">
+    <v-col cols="5" md="8" lg="18">
       
       <!-- Adiciona um espaçamento acima do container -->
       <v-container class="mt-15">
         <!-- Botão de Novo Cliente -->
-        <v-btn class="action-button" color="primary" @click="novoCliente">
+        <v-btn class="action-button mb-7" color="primary" @click="novoCliente">
           Novo Cliente
         </v-btn>
 
@@ -25,12 +25,24 @@
           <td>{{ item.telefone }}</td>
           <td>{{ item.dataCadastro | formatDate }}</td>
           <td>
-            <v-btn icon @click="editarCliente(item)">
-              <v-icon>mdi-pencil</v-icon>
-            </v-btn>
-            <v-btn icon @click="deletarCliente(item)">
-              <v-icon color="red">mdi-delete</v-icon>
-            </v-btn>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon v-bind="attrs" v-on="on" @click="editarCliente(item)">
+                  <v-icon color="#0081b8">mdi-pencil-outline</v-icon>
+                </v-btn>
+              </template>
+              <span>Editar Cliente</span>
+            </v-tooltip>
+
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon v-bind="attrs" v-on="on" @click="deletarCliente(item)">
+                  <v-icon color="#0081b8">mdi-delete-outline</v-icon>
+                </v-btn>
+              </template>
+              <span>Excluir Cliente</span>
+            </v-tooltip>
+
           </td>
         </tr>
       </template>
