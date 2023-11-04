@@ -82,8 +82,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import ClientManager from '../../views/ClientManager.vue';
-import axios from 'axios';
+import ClientManager from '@/views/ClientManager.vue';
 
 export default {
   components: {
@@ -100,7 +99,7 @@ export default {
         { text: 'CPF/CNPJ', value: 'cpfOuCnpj' },
         { text: 'Email', value: 'email' },
         { text: 'Telefone', value: 'telefone' },
-        { text: 'Data de Cadastro', value: 'dataCadastro', align: 'center', sortable: false },
+        { text: 'Data de Cadastro', value: 'dataCadastro', sortable: false },
         { text: 'Ações', value: 'actions', sortable: false },
       ],
     };
@@ -109,13 +108,16 @@ export default {
     ...mapState(['clientes']),
   },
   methods: {
-    ...mapActions(['createCliente', 'fetchClientes', 'deleteCliente']),
+    ...mapActions(['fetchClientes', 'deleteCliente']),
     openNewClientDialog() {
       this.$refs.clientManager.openDialog();
     },
     editarCliente(cliente) {
-      this.$refs.clientManager.openDialog(cliente);
-    },
+    this.$refs.clientManager.openDialog(true);
+    this.$nextTick(() => {
+      this.$refs.clientManager.cliente = { ...cliente };
+    });
+  },
     openDeleteDialog(cliente) {
       this.selectedCliente = cliente;
       this.deleteDialog = true;
@@ -126,28 +128,35 @@ export default {
     },
     deletarCliente() {
       if (this.selectedCliente) {
-        axios.delete(`/api/clientes/${this.selectedCliente.id}`)
+        this.loading = true;
+        this.deleteCliente(this.selectedCliente.id)
           .then(() => {
-            this.deleteCliente(this.selectedCliente.id);
             this.closeDeleteDialog();
           })
           .catch(error => {
             console.error('Erro ao excluir o cliente:', error);
-            alert('Erro ao excluir o cliente.');
+            if (error.response && error.response.status === 401) {
+              this.$router.push('/login');
+              alert('Sessão expirada, por favor faça login novamente.');
+            } else {
+              alert('Erro ao excluir o cliente. Por favor, tente novamente.');
+            }
+          })
+          .finally(() => {
+            this.loading = false;
           });
       }
-    },
+    }
+  },
+  filters: {
     formatDate(value) {
       if (value) {
-        return new Date(value).toLocaleDateString();
+        return new Intl.DateTimeFormat('pt-BR').format(new Date(value));
       }
     },
   },
   created() {
-    this.loading = true;
-    this.fetchClientes().finally(() => {
-      this.loading = false;
-    });
+    this.fetchClientes();
   },
 };
 </script>
@@ -158,6 +167,6 @@ export default {
   font-weight: normal;
 }
 .font-weight-normal {
-  font-weight: normal; /* Remove o negrito do texto */
+  font-weight: normal;
 }
 </style>

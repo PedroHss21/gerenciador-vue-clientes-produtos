@@ -18,6 +18,18 @@ export default {
     // Atualiza o estado com a lista de clientes
     SET_CLIENTES(state, clientes) {
         state.clientes = clientes;
+    },
+    ADD_CLIENTE(state, cliente) {
+        state.clientes.push(cliente);
+    },
+    UPDATE_CLIENTE(state, updatedCliente) {
+        const index = state.clientes.findIndex(c => c.id === updatedCliente.id);
+        if (index !== -1) {
+            state.clientes.splice(index, 1, updatedCliente);
+        }
+    },
+    DELETE_CLIENTE(state, clienteId) {
+        state.clientes = state.clientes.filter(c => c.id !== clienteId);
     }
 
 };
