@@ -10,6 +10,7 @@ export default new Vuex.Store({
         user: null,
         token: null,
         clientes: [],
+        produtos: [],
     },
     mutations,
     actions,

@@ -161,7 +161,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .action-button {
   text-transform: none;
   font-weight: normal;
@@ -169,9 +169,6 @@ export default {
 .font-weight-normal {
   font-weight: normal;
 }
-</style>
-
-<style scoped>
 .cancel-button {
   border: 1px solid #a2a9ad;
   color: #929497;
