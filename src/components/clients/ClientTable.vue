@@ -70,8 +70,8 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="grey" text @click="closeDeleteDialog">Cancelar</v-btn>
-              <v-btn color="red" text @click="deletarCliente">Excluir</v-btn>
+              <v-btn class='cancel-button' text @click="closeDeleteDialog">Cancelar</v-btn>
+              <v-btn class='delete-button' text @click="deletarCliente">Excluir</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -168,5 +168,33 @@ export default {
 }
 .font-weight-normal {
   font-weight: normal;
+}
+</style>
+
+<style scoped>
+.cancel-button {
+  border: 1px solid #a2a9ad;
+  color: #929497;
+  background-color: transparent;
+  text-transform: none;
+  font-weight: normal;
+}
+.delete-button {
+  border: 1px solid #0081b8;
+  color: white;
+  background-color: #0081b8;
+  text-transform: none;
+  font-weight: normal;
+}
+
+.delete-button:hover {
+  background-color: #0081b8;
+  border-color: #0081b8;
+  color: white;
+}
+
+.delete-button:active {
+  background-color: #006f9b;
+  border-color: #006f9b;
 }
 </style>

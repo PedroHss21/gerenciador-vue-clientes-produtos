@@ -34,8 +34,8 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="red darken-1" text @click="closeDialog">Cancelar</v-btn>
-        <v-btn color="green darken-1" text @click="salvarCliente">
+        <v-btn class='cancel-button' text @click="closeDialog">Cancelar</v-btn>
+        <v-btn class='save_edit-button' text @click="salvarCliente">
           {{ editMode ? 'Atualizar' : 'Salvar' }}
         </v-btn>
       </v-card-actions>
@@ -137,3 +137,34 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+
+.cancel-button {
+  border: 1px solid #a2a9ad;
+  color: #929497;
+  background-color: transparent;
+  text-transform: none;
+  font-weight: normal;
+}
+.save_edit-button {
+  border: 1px solid #0081b8;
+  color: white;
+  background-color: #0081b8;
+  text-transform: none;
+  font-weight: normal;
+}
+
+.save_edit-button:hover {
+  background-color: #0081b8;
+  border-color: #0081b8;
+  color: white;
+}
+
+.save_edit-button:active {
+  background-color: #006f9b;
+  border-color: #006f9b;
+}
+</style>
+
+
