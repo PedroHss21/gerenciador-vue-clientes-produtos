@@ -95,5 +95,66 @@ export default {
             .catch(error => {
                 console.error('Erro ao deletar cliente:', error);
             });
+    },
+
+    fetchProdutos({ commit }) {
+        return axios.get('http://localhost:3400/produtos', {
+            headers: {
+                'Authorization': localStorage.getItem('userToken')
+            }
+        })
+            .then(response => {
+                commit('SET_PRODUTOS', response.data);
+            })
+            .catch(error => {
+                console.error('Erro ao buscar produtos:', error);
+            });
+    },
+
+    createProduto({ commit }, produtoData) {
+        return axios.post('http://localhost:3400/produtos', produtoData, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('userToken')
+            }
+        })
+            .then(response => {
+                commit('ADD_PRODUTO', response.data);
+            })
+            .catch(error => {
+                console.error('Erro ao criar produto:', error);
+            });
+    },
+
+    updateProduto({ commit }, produtoData) {
+        return axios.put(`http://localhost:3400/produtos/${produtoData.id}`, produtoData, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('userToken')
+            }
+        })
+            .then(response => {
+                commit('UPDATE_PRODUTO', response.data);
+            })
+            .catch(error => {
+                console.error('Erro ao atualizar produto:', error);
+            });
+    },
+
+    deleteProduto({ commit }, produtoId) {
+        return axios.delete(`http://localhost:3400/produtos/${produtoId}`, {
+            headers: {
+                'Authorization': localStorage.getItem('userToken')
+            }
+        })
+            .then(() => {
+                commit('DELETE_PRODUTO', produtoId);
+            })
+            .catch(error => {
+                console.error('Erro ao deletar produto:', error);
+            });
+
+
     }
+
 }

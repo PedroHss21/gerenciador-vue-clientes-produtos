@@ -30,6 +30,28 @@ export default {
     },
     DELETE_CLIENTE(state, clienteId) {
         state.clientes = state.clientes.filter(c => c.id !== clienteId);
-    }
+    },
+    // Adiciona um novo produto ao estado
+    ADD_PRODUTO(state, produto) {
+        state.produtos.push(produto);
+    },
+
+    // Atualiza um produto existente no estado
+    UPDATE_PRODUTO(state, updatedProduto) {
+        const index = state.produtos.findIndex(p => p.id === updatedProduto.id);
+        if (index !== -1) {
+            state.produtos.splice(index, 1, updatedProduto);
+        }
+    },
+
+    // Define o estado com a lista de produtos
+    SET_PRODUTOS(state, produtos) {
+        state.produtos = produtos;
+    },
+
+    // Remove um produto do estado
+    DELETE_PRODUTO(state, produtoId) {
+        state.produtos = state.produtos.filter(p => p.id !== produtoId);
+    },
 
 };

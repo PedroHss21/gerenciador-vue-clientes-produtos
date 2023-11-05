@@ -4,7 +4,8 @@ import LoginUser from '@/views/LoginUser.vue';
 import HomePage from '@/views/HomePage.vue';
 import ClientTable from '@/components/clients/ClientTable.vue';
 import ClientManager from '@/views/ClientManager.vue';
-import ProductManager from '@/views/ProductManager.vue';
+import ProductTable from '@/components/products/ProductTable.vue';
+
 
 Vue.use(Router);
 
@@ -34,8 +35,8 @@ export default new Router({
         },
         {
             path: '/produtos',
-            name: 'productManager',
-            component: ProductManager
+            name: 'Produtos',
+            component: ProductTable
         }
     ]
 });
