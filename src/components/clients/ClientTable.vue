@@ -13,7 +13,7 @@
             <h2 class="ml-2 mb-0 font-weight-normal primary--text">Clientes</h2>
           </v-col>
         </v-row>
-        
+
         <!-- Linha horizontal personalizada -->
         <v-divider class="my-3" :style="{ 'backgroundColor': 'tertiary' }"></v-divider>
 
@@ -24,12 +24,7 @@
         <client-manager ref="clientManager"></client-manager>
 
         <!-- Tabela de Clientes -->
-        <v-data-table
-          :headers="headers"
-          :items="clientes"
-          :loading="loading"
-          class="elevation-1"
-        >
+        <v-data-table :headers="headers" :items="clientes" :loading="loading" class="elevation-1">
           <template v-slot:item="{ item }">
             <tr>
               <td>{{ item.id }}</td>
@@ -64,13 +59,19 @@
         <!-- Diálogo de Confirmação de Exclusão -->
         <v-dialog v-model="deleteDialog" persistent max-width="500px">
           <v-card>
-            <v-card-title>Excluir Cliente</v-card-title>
+            <v-card-title class="d-flex justify-space-between">
+              Excluir Cliente
+              <!-- Botão de fechar no canto superior direito -->
+              <v-btn icon @click="closeDeleteDialog">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-card-title>
             <v-card-text>
               Você tem certeza que deseja excluir o cliente <strong>{{ selectedCliente?.nome }}</strong>?
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn class='delete-button' text @click="deletarCliente">Excluir Cliente</v-btn>
+              <v-btn class='delete-button' text @click="deletarClienteo">Excluir Cliente</v-btn>
               <v-btn class='cancel-button' text @click="closeDeleteDialog">Cancelar</v-btn>
             </v-card-actions>
           </v-card>
@@ -113,11 +114,11 @@ export default {
       this.$refs.clientManager.openDialog();
     },
     editarCliente(cliente) {
-    this.$refs.clientManager.openDialog(true);
-    this.$nextTick(() => {
-      this.$refs.clientManager.cliente = { ...cliente };
-    });
-  },
+      this.$refs.clientManager.openDialog(true);
+      this.$nextTick(() => {
+        this.$refs.clientManager.cliente = { ...cliente };
+      });
+    },
     openDeleteDialog(cliente) {
       this.selectedCliente = cliente;
       this.deleteDialog = true;
@@ -166,9 +167,11 @@ export default {
   text-transform: none;
   font-weight: normal;
 }
+
 .font-weight-normal {
   font-weight: normal;
 }
+
 .cancel-button {
   border: 1px solid #006f9b;
   color: white;
@@ -178,12 +181,13 @@ export default {
 }
 
 .cancel-button:hover {
-    border: 1px solid #0081b8;
-    color: white;
-    background-color: #0081b8;
-    text-transform: none;
-    font-weight: normal;
-  }
+  border: 1px solid #0081b8;
+  color: white;
+  background-color: #0081b8;
+  text-transform: none;
+  font-weight: normal;
+}
+
 .delete-button {
   border: 1px solid #a2a9ad;
   color: #58595b;

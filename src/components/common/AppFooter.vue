@@ -2,6 +2,13 @@
   <v-footer padless fixed>
     <v-col class="footer-content" cols="12">
       © {{ currentYear }} - Esplin Software | Direitos Reservados
+      <v-img
+        class="footer-logo"
+        src="@/assets/logo-branco-footer.svg"
+        contain
+        max-height="100%"
+        max-width="100px"
+      ></v-img>
     </v-col>
   </v-footer>
 </template>
@@ -19,16 +26,18 @@ export default {
 
 <style scoped>
 .footer-content {
-  position: relative; /* Adicionado para posicionar corretamente o pseudo-elemento */
   font-size: 12px;
   height: 50px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  text-align: left;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 0;
   background-color: #a2a9ad;
   color: white;
+  position: relative;
 }
 
 .footer-content::before {
@@ -39,5 +48,11 @@ export default {
   right: 0;
   height: 4px; /* Altura da barra */
   background-color: #00609c; /* Cor da barra */
+}
+
+.footer-logo {
+  height: auto;
+  max-width: 100px;
+  margin-left: auto;
 }
 </style>

@@ -1,8 +1,12 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="600px">
     <v-card>
-      <v-card-title>
-        {{ editMode ? 'Editar Cliente' : 'Novo Cliente' }}
+      <v-card-title class="text-h5">
+        <div class="flex-grow-1">{{ editMode ? 'Editar Cliente' : 'Novo Cliente' }}</div>
+        <!-- Botão para fechar o diálogo -->
+        <v-btn icon @click="closeDialog">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
       </v-card-title>
       <v-card-text>
         <v-form ref="form" v-model="valid" lazy-validation>
