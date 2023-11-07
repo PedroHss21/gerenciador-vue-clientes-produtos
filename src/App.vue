@@ -1,16 +1,10 @@
 <template>
   <v-app>
     <!-- Barra de Navegação -->
-    <v-app-bar v-if="$route.path !== '/login'" app color="primary" dark>
-    <router-link to="/">
-      <!-- Logo no canto esquerdo -->
-      <v-img
-        src="@/assets/logo-branco.svg"
-        class="logo-image"
-        contain
-        :height="150"
-      ></v-img>
-    </router-link>
+    <v-app-bar v-if="$route.path !== '/login'" app color="primary" dark class="custom-app-bar">
+      <router-link to="/">
+        <v-img src="@/assets/logo-branco.svg" class="logo-image" contain></v-img>
+      </router-link>
 
       <!-- Espaçamento para centralizar os itens de navegação, mantendo o mesmo tamanho que a imagem e ícones para balancear -->
       <v-spacer></v-spacer>
@@ -87,23 +81,30 @@ export default {
 </script>
 
 <style scoped>
-.menu-button {
-  text-transform: none;
-  font-weight: normal;
+.custom-app-bar {
+  height: 64px;
 }
 
 .logo-image {
-  max-height: auto;
-  max-width: 120px; 
+  max-height: 60px;
+  max-width: 120px;
   margin-right: 16px;
 }
 
-.v-app-bar {
-  justify-content: space-between; /* Assegura que os elementos sejam alinhados aos cantos e ao centro corretamente */
+.menu-button {
+  text-transform: none;
+  font-weight: normal;
+  height: 100%;
+  align-self: center;
 }
 
-/* Assegura que o conteúdo do v-app-bar (incluindo o logo e os botões) seja centralizado horizontalmente */
-.v-app-bar > *:not(.v-img):not(.v-btn) {
-  flex: 1 1 auto;
+.v-btn.icon {
+  height: 100%;
+  align-self: center;
+}
+
+.v-icon {
+  align-self: center;
 }
 </style>
+
