@@ -173,40 +173,40 @@ export default {
 }
 
 .cancel-button {
-  border: 1px solid #006f9b;
-  color: white;
-  background-color: #006f9b;
+  border: 1px solid var(--primary-color);
+  color: var(--white-color);
+  background-color: var(--primary-color);
   text-transform: none;
   font-weight: normal;
 }
 
 .cancel-button:hover {
-  border: 1px solid #0081b8;
-  color: white;
-  background-color: #0081b8;
+  border: 1px solid var(--secondary-color);
+  color: var(--white-color);
+  background-color: var(--secondary-color);
   text-transform: none;
   font-weight: normal;
 }
 
 .delete-button {
-  border: 1px solid #a2a9ad;
-  color: #58595b;
+  border: 1px solid var(--tertiary-color);
+  color: var(--tertiary2-color);
   background-color: transparent;
   text-transform: none;
   font-weight: normal;
 }
 
 .delete-button:hover {
-  border: 1px solid #a2a9ad;
-  color: #58595b;
+  border: 1px solid var(--tertiary-color);
+  color: var(--tertiary2-color);
   background-color: transparent;
   text-transform: none;
   font-weight: normal;
 }
 
 .delete-button:active {
-  border: 1px solid #a2a9ad;
-  color: #58595b;
+  border: 1px solid var(--tertiary-color);
+  color: var(--tertiary2-color);
   background-color: transparent;
   text-transform: none;
   font-weight: normal;
