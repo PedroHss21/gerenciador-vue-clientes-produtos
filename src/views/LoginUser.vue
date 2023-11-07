@@ -2,8 +2,7 @@
   <div class="login-background">
     <v-container class="fill-height justify-center align-center">
       <v-card class="pa-10 elevation-5" style="padding: 45px; max-width: 360px;" rounded-lg>
-        <img src="" class="mb-10" style="width: 270px;">
-        <v-card-title class="headline mb-5">Login</v-card-title>
+        <img src="@/assets/logo-azul.svg" style="width: 270px;">
         <v-card-text>
           <v-form ref="form">
             <v-text-field

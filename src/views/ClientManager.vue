@@ -34,10 +34,10 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn class='cancel-button' text @click="closeDialog">Cancelar</v-btn>
         <v-btn class='save_edit-button' text @click="salvarCliente">
-          {{ editMode ? 'Atualizar' : 'Salvar' }}
+          {{ editMode ? 'Atualizar' : 'Gravar' }}
         </v-btn>
+        <v-btn class='cancel-button' text @click="closeDialog">Cancelar</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -142,15 +142,15 @@ export default {
 
 .cancel-button {
   border: 1px solid #a2a9ad;
-  color: #929497;
+  color: #58595b;
   background-color: transparent;
   text-transform: none;
   font-weight: normal;
 }
 .save_edit-button {
-  border: 1px solid #0081b8;
+  border: 1px solid #006f9b;
   color: white;
-  background-color: #0081b8;
+  background-color: #006f9b;
   text-transform: none;
   font-weight: normal;
 }
@@ -166,5 +166,4 @@ export default {
   border-color: #006f9b;
 }
 </style>
-
 
