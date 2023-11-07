@@ -9,7 +9,7 @@
           <!-- Título Produtos com ícone -->
           <v-row align="center">
             <v-col cols="12" sm="auto" class="d-flex align-items-center">
-              <v-icon large color="primary">mdi-storefront</v-icon>
+              <v-icon large color="primary">mdi-package</v-icon>
               <h2 class="ml-2 mb-0 font-weight-normal primary--text">Produtos</h2>
             </v-col>
           </v-row>
@@ -70,8 +70,8 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
+                <v-btn class='delete-button' text @click="deletarProduto">Excluir Produto</v-btn>
                 <v-btn class='cancel-button' text @click="closeDeleteDialog">Cancelar</v-btn>
-                <v-btn class='delete-button' text @click="deletarProduto">Excluir</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -168,36 +168,49 @@
   </script>
   
   <style scoped>
-.action-button {
-  text-transform: none;
-  font-weight: normal;
-}
-.font-weight-normal {
-  font-weight: normal;
-}
-.cancel-button {
-  border: 1px solid #a2a9ad;
-  color: #929497;
-  background-color: transparent;
-  text-transform: none;
-  font-weight: normal;
-}
-.delete-button {
-  border: 1px solid #0081b8;
-  color: white;
-  background-color: #0081b8;
-  text-transform: none;
-  font-weight: normal;
-}
+  .action-button {
+    text-transform: none;
+    font-weight: normal;
+  }
+  .font-weight-normal {
+    font-weight: normal;
+  }
+  .cancel-button {
+    border: 1px solid #006f9b;
+    color: white;
+    background-color: #006f9b;
+    text-transform: none;
+    font-weight: normal;
+  }
 
-.delete-button:hover {
-  background-color: #0081b8;
-  border-color: #0081b8;
-  color: white;
-}
-
-.delete-button:active {
-  background-color: #006f9b;
-  border-color: #006f9b;
-}
-</style>
+  .cancel-button:hover {
+    border: 1px solid #0081b8;
+    color: white;
+    background-color: #0081b8;
+    text-transform: none;
+    font-weight: normal;
+  }
+  .delete-button {
+    border: 1px solid #a2a9ad;
+    color: #58595b;
+    background-color: transparent;
+    text-transform: none;
+    font-weight: normal;
+  }
+  
+  .delete-button:hover {
+    border: 1px solid #a2a9ad;
+    color: #58595b;
+    background-color: transparent;
+    text-transform: none;
+    font-weight: normal;
+  }
+  
+  .delete-button:active {
+    border: 1px solid #a2a9ad;
+    color: #58595b;
+    background-color: transparent;
+    text-transform: none;
+    font-weight: normal;
+  }
+  </style>
