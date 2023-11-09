@@ -1,10 +1,16 @@
 <template>
   <v-app>
     <!-- Barra de Navegação -->
-    <v-app-bar v-if="$route.path !== '/login'" app color="primary" dark class="custom-app-bar">
-      <router-link to="/">
-        <v-img src="@/assets/logo-branco.svg" class="logo-image" contain></v-img>
-      </router-link>
+    <v-app-bar v-if="$route.path !== '/login'" app color="primary" dark>
+    <router-link to="/">
+      <!-- Logo no canto esquerdo -->
+      <v-img
+        src="@/assets/logo-branco.svg"
+        class="logo-image"
+        contain
+        :height="150"
+      ></v-img>
+    </router-link>
 
       <!-- Espaçamento para centralizar os itens de navegação, mantendo o mesmo tamanho que a imagem e ícones para balancear -->
       <v-spacer></v-spacer>
@@ -81,30 +87,22 @@ export default {
 </script>
 
 <style scoped>
-.custom-app-bar {
-  height: 64px;
-}
-
-.logo-image {
-  max-height: 60px;
-  max-width: 120px;
-  margin-right: 16px;
-}
-
 .menu-button {
   text-transform: none;
   font-weight: normal;
-  height: 100%;
-  align-self: center;
 }
 
-.v-btn.icon {
-  height: 100%;
-  align-self: center;
+.logo-image {
+  max-height: auto;
+  max-width: 120px; 
+  margin-right: 16px;
 }
 
-.v-icon {
-  align-self: center;
+.v-app-bar {
+  justify-content: space-between;
+}
+
+.v-app-bar > *:not(.v-img):not(.v-btn) {
+  flex: 1 1 auto;
 }
 </style>
-

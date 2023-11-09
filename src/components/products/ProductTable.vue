@@ -154,10 +154,12 @@ export default {
       if (value) {
         return new Intl.DateTimeFormat('pt-BR').format(new Date(value));
       }
+      return '';
     },
     currency(value) {
       if (value != null) {
-        return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const numberValue = Number(value); // Converte a entrada para um número
+        return numberValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
       }
       return '';
     },
