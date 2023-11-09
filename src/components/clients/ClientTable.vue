@@ -71,7 +71,7 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn class='delete-button' text @click="deletarClienteo">Excluir Cliente</v-btn>
+              <v-btn class='delete-button' text @click="deletarCliente">Excluir Cliente</v-btn>
               <v-btn class='cancel-button' text @click="closeDeleteDialog">Cancelar</v-btn>
             </v-card-actions>
           </v-card>
