@@ -119,7 +119,7 @@ export default {
     },
 
     goToHelpSite() {
-      window.open('https://ajuda-homologacao.alterdata.com.br/x/_oA6Cg', '_blank');
+      window.open('https://esplinhubdocs.vercel.app/', '_blank');
     },
   },
 
