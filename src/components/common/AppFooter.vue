@@ -1,5 +1,5 @@
 <template>
-  <v-footer padless fixed>
+  <v-footer :class="{'dark-mode': $vuetify.theme.dark}" padless fixed>
     <v-col class="footer-content" cols="12">
       © {{ currentYear }} - Esplin Software | Direitos Reservados
       <v-img
@@ -54,5 +54,9 @@ export default {
   height: auto;
   max-width: 100px;
   margin-left: auto;
+}
+
+.dark-mode .footer-content {
+  background-color: #58595b; /* Cor de fundo para o tema escuro */
 }
 </style>

@@ -9,10 +9,16 @@ export default new Vuetify({
             light: {
                 primary: '#165091',
                 secondary: '#247daa',
-                tertiary: '#a2a9ad',
-                tertiary2: '#58595b',
+                tertiary: '#d0d2d3',
+                tertiary2: '#929497',
                 white: '#FFFFFF'
             },
+            dark: {
+                primary: '#165091',
+                secondary: '#247daa',
+                tertiary: '#d0d2d3',
+                tertiary2: '#929497',
+            }
         },
     },
 });

@@ -22,6 +22,16 @@
       <!-- Espaçamento para alinhar o ícone de ajuda e o logout à direita -->
       <v-spacer></v-spacer>
 
+       <!-- Ícone de modo Claro/Escuro -->
+       <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn text icon v-bind="attrs" v-on="on" @click="darkTheme = !darkTheme">
+            <v-icon>{{ darkTheme ? 'mdi-weather-sunny' : 'mdi-weather-night' }}</v-icon>
+          </v-btn>
+        </template>
+        <span>{{ darkTheme ? 'Ativar modo claro' : 'Ativar modo escuro' }}</span>
+      </v-tooltip>
+
       <!-- Ícone de Ajuda -->
       <v-tooltip bottom>
         <template v-slot:activator="{ on, attrs }">
@@ -68,7 +78,8 @@ import AppFooter from './components/common/AppFooter.vue';
 export default {
   data() {
     return {
-      drawer: false
+      drawer: false,
+      darkTheme: false
     };
   },
   computed: {
@@ -79,6 +90,11 @@ export default {
       const isAuthenticated = !!localStorage.getItem('userToken');
       const requiresAuth = this.$route.matched.some(record => record.meta.requiresAuth);
       return isAuthenticated && requiresAuth;
+    }
+  },
+  watch: {
+    darkTheme(newVal) {
+      this.$vuetify.theme.dark = newVal;
     }
   },
   methods: {
