@@ -1,23 +1,23 @@
 <template>
   <v-app>
     <!-- Barra de Navegação -->
-    <v-app-bar v-if="$route.path !== '/login'" app color="primary" dark>
-    <router-link to="/">
-      <!-- Logo no canto esquerdo -->
-      <v-img
-        src="@/assets/logo-branco.svg"
-        class="logo-image"
-        contain
-        :height="150"
-      ></v-img>
-    </router-link>
+    <v-app-bar v-if="shouldShowNavBar" app color="primary" dark>
+      <!-- Botão Hambúrguer (Visível apenas em dispositivos móveis) -->
+      <v-btn class="d-sm-none" icon @click="drawer = !drawer">
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
 
-      <!-- Espaçamento para centralizar os itens de navegação, mantendo o mesmo tamanho que a imagem e ícones para balancear -->
+      <!-- Logo (Visível apenas em desktop) -->
+      <router-link to="/" class="d-none d-sm-flex">
+        <v-img src="@/assets/logo-branco.svg" class="logo-image" contain :height="150"></v-img>
+      </router-link>
+
+      <!-- Espaçamento para centralizar os itens de navegação -->
       <v-spacer></v-spacer>
 
       <!-- Links de Navegação Centralizados -->
-      <v-btn class="menu-button" text to="/clientes">Clientes</v-btn>
-      <v-btn class="menu-button" text to="/produtos">Produtos</v-btn>
+      <v-btn class="d-none d-sm-flex menu-button" text to="/clientes">Clientes</v-btn>
+      <v-btn class="d-none d-sm-flex menu-button" text to="/produtos">Produtos</v-btn>
 
       <!-- Espaçamento para alinhar o ícone de ajuda e o logout à direita -->
       <v-spacer></v-spacer>
@@ -32,20 +32,32 @@
         <span>Ajuda</span>
       </v-tooltip>
 
-      <!-- Logout -->
-      <v-btn class="menu-button" text @click="performLogout">
-          <v-icon left>mdi-logout</v-icon>
-          Sair
-        </v-btn>
+      <!-- Botão Sair (Ícone em dispositivos móveis, Texto em desktop) -->
+      <v-btn icon class="d-sm-none" @click="performLogout">
+        <v-icon>mdi-logout</v-icon>
+      </v-btn>
+      <v-btn class="d-none d-sm-flex menu-button" text @click="performLogout">
+        <v-icon left>mdi-logout</v-icon>
+        Sair
+      </v-btn>
     </v-app-bar>
-    
+
+    <!-- Drawer para dispositivos móveis -->
+    <v-navigation-drawer v-model="drawer" app temporary>
+      <v-list>
+        <v-list-item link to="/">Principal</v-list-item>
+        <v-list-item link to="/clientes">Clientes</v-list-item>
+        <v-list-item link to="/produtos">Produtos</v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
     <!-- Conteúdo Principal -->
     <v-main>
-      <router-view/>
+      <router-view />
     </v-main>
 
-    <!-- Rodapé -->
-    <AppFooter app></AppFooter>
+    <!-- Rodapé (Oculto em dispositivos móveis) -->
+    <AppFooter v-if="!isMobile" app></AppFooter>
   </v-app>
 </template>
 
@@ -54,35 +66,51 @@ import { mapActions } from 'vuex';
 import AppFooter from './components/common/AppFooter.vue';
 
 export default {
-    methods: {
-        ...mapActions(["loginUser", "logoutUser"]), // Incluindo logoutUser nas ações
+  data() {
+    return {
+      drawer: false
+    };
+  },
+  computed: {
+    isMobile() {
+      return this.$vuetify.breakpoint.xsOnly;
+    },
+    shouldShowNavBar() {
+      const isAuthenticated = !!localStorage.getItem('userToken');
+      const requiresAuth = this.$route.matched.some(record => record.meta.requiresAuth);
+      return isAuthenticated && requiresAuth;
+    }
+  },
+  methods: {
+    ...mapActions(["loginUser", "logoutUser"]),
 
-        performLogin() {
-            const credentials = { email: this.email, password: this.password }; // Consistência no nome das propriedades
-            this.loginUser(credentials)
-                .then(() => {
-                this.$router.push("/");
-            });
-        },
-        
-        performLogout() {
-            this.logoutUser()
-            .then(() => {
-                this.$router.push('/login');
-            })
-            .catch(error => {
-                console.error('Erro no logout:', error);
-            });
-        },
-
-        goToHelpSite() {
-        window.open('https://ajuda-homologacao.alterdata.com.br/x/_oA6Cg', '_blank');
-        },
+    performLogin() {
+      const credentials = { email: this.email, password: this.password }; // Consistência no nome das propriedades
+      this.loginUser(credentials)
+        .then(() => {
+          this.$router.push("/");
+        });
     },
 
-    components: {
-        AppFooter
-    }
+    performLogout() {
+      this.logoutUser()
+        .then(() => {
+          this.$router.push('/login');
+        })
+        .catch(error => {
+          console.error('Erro no logout:', error);
+        });
+    },
+
+    goToHelpSite() {
+      window.open('https://ajuda-homologacao.alterdata.com.br/x/_oA6Cg', '_blank');
+    },
+  },
+
+  components: {
+    AppFooter
+  }
+
 };
 </script>
 
@@ -94,7 +122,7 @@ export default {
 
 .logo-image {
   max-height: auto;
-  max-width: 120px; 
+  max-width: 120px;
   margin-right: 16px;
 }
 
@@ -102,7 +130,7 @@ export default {
   justify-content: space-between;
 }
 
-.v-app-bar > *:not(.v-img):not(.v-btn) {
+.v-app-bar>*:not(.v-img):not(.v-btn) {
   flex: 1 1 auto;
 }
 </style>

@@ -9,16 +9,30 @@
         <h2 class="ml-2 mb-0 font-weight-normal primary--text">Principal</h2>
       </v-col>
     </v-row>
-    
     <v-divider class="my-3" :style="{ 'backgroundColor': 'tertiary' }"></v-divider>
+
+    <div class="img-container">
+      <img v-if="isDesktop" src="@/assets/LiveDesktopWeb.svg" class="img-responsive" />
+      <img v-else src="@/assets/LiveDesktopMobile.svg" class="img-responsive" />
+    </div>
   </v-container>
 </template>
-
 
 <script>
 import { mapActions } from 'vuex';
 
 export default {
+  data() {
+    return {
+      isDesktop: window.innerWidth > 600
+    };
+  },
+  created() {
+    window.addEventListener('resize', this.checkWidth);
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.checkWidth);
+  },
   methods: {
     ...mapActions(['logoutUser']),
 
@@ -30,14 +44,25 @@ export default {
         .catch(error => {
           console.error('Erro no logout:', error);
         });
+    },
+    checkWidth() {
+      this.isDesktop = window.innerWidth > 600;
     }
   }
 };
 </script>
 
 <style scoped>
-
 .font-weight-normal {
-  font-weight: normal; /* Remove o negrito do texto */
+  font-weight: normal;
+}
+.img-container {
+  text-align: center;
+  margin-top: 30px;
+}
+.img-responsive {
+  width: 80%;
+  height: auto; 
+  display: inline-block;
 }
 </style>
