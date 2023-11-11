@@ -35,8 +35,8 @@ export default {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-right: 0;
-  background-color: #a2a9ad;
-  color: white;
+  background-color: var(--tertiary-color);
+  color: var(--white-color);
   position: relative;
 }
 
@@ -47,7 +47,7 @@ export default {
   left: 0;
   right: 0;
   height: 4px; /* Altura da barra */
-  background-color: #00609c; /* Cor da barra */
+  background-color: var(--primary-color); /* Cor da barra */
 }
 
 .footer-logo {

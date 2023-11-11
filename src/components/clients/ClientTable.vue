@@ -24,36 +24,38 @@
         <client-manager ref="clientManager"></client-manager>
 
         <!-- Tabela de Clientes -->
-        <v-data-table :headers="headers" :items="clientes" :loading="loading" class="elevation-1">
+        <v-data-table :headers="headers" :items="clientes" :loading="loading" class="elevation-1" mobile-breakpoint="500"
+          dense>
           <template v-slot:item="{ item }">
             <tr>
               <td>{{ item.id }}</td>
               <td>{{ item.nome }}</td>
-              <td>{{ item.cpfOuCnpj }}</td>
-              <td>{{ item.email }}</td>
-              <td>{{ item.telefone }}</td>
-              <td>{{ item.dataCadastro | formatDate }}</td>
+              <!-- Colunas ocultas em telas pequenas -->
+              <td class="d-none d-md-table-cell">{{ item.cpfOuCnpj }}</td>
+              <td class="d-none d-md-table-cell">{{ item.email }}</td>
+              <td class="d-none d-md-table-cell">{{ item.telefone }}</td>
+              <td class="d-none d-md-table-cell">{{ item.dataCadastro | formatDate }}</td>
               <td>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn icon v-bind="attrs" v-on="on" @click="editarCliente(item)">
-                      <v-icon color='primary'>mdi-pencil-outline</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Editar Cliente</span>
-                </v-tooltip>
+                <v-btn icon v-bind="attrs" v-on="on" @click="editarCliente(item)">
+                  <v-icon color='primary'>mdi-pencil-outline</v-icon>
+                </v-btn>
+          </template>
+          <span>Editar Cliente</span>
+          </v-tooltip>
 
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn icon v-bind="attrs" v-on="on" @click="openDeleteDialog(item)">
-                      <v-icon color='primary'>mdi-delete-outline</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Excluir Cliente</span>
-                </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+                <v-btn icon v-bind="attrs" v-on="on" @click="openDeleteDialog(item)">
+                  <v-icon color='primary'>mdi-delete-outline</v-icon>
+                </v-btn>
+            </template>
+            <span>Excluir Cliente</span>
+          </v-tooltip>
 
-              </td>
-            </tr>
+          </td>
+          </tr>
           </template>
         </v-data-table>
         <!-- Diálogo de Confirmação de Exclusão -->
@@ -211,4 +213,5 @@ export default {
   text-transform: none;
   font-weight: normal;
 }
+
 </style>

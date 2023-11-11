@@ -24,16 +24,19 @@
         <product-manager ref="productManager"></product-manager>
 
         <!-- Tabela de Produtos -->
-        <v-data-table :headers="headers" :items="produtos" :loading="loading" class="elevation-1">
+        <v-data-table :headers="headers" :items="produtos" :loading="loading" class="elevation-1" mobile-breakpoint="500"
+          dense>
           <template v-slot:item="{ item }">
             <tr>
               <td>{{ item.id }}</td>
               <td>{{ item.nome }}</td>
-              <td>{{ item.valor | currency }}</td>
-              <td>{{ item.quantidadeEstoque }}</td>
-              <td>{{ item.observacao }}</td>
-              <td>{{ item.dataCadastro | formatDate }}</td>
+              <!-- Ocultar algumas colunas em telas pequenas -->
+              <td class="d-none d-md-table-cell">{{ item.valor | currency }}</td>
+              <td class="d-none d-md-table-cell">{{ item.quantidadeEstoque }}</td>
+              <td class="d-none d-md-table-cell">{{ item.observacao }}</td>
+              <td class="d-none d-md-table-cell">{{ item.dataCadastro | formatDate }}</td>
               <td>
+                <!-- Ícones de editar e excluir com alinhamento horizontal -->
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-btn icon v-bind="attrs" v-on="on" @click="editarProduto(item)">
@@ -51,11 +54,11 @@
                   </template>
                   <span>Excluir Produto</span>
                 </v-tooltip>
-
               </td>
             </tr>
           </template>
         </v-data-table>
+
         <!-- Diálogo de Confirmação de Exclusão -->
         <v-dialog v-model="deleteDialog" persistent max-width="500px">
           <v-card>
