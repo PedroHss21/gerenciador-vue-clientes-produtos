@@ -1,6 +1,6 @@
 # EsplinHub - Gerenciador de Clientes e Produtos
 
-![Logo do EsplinHub](https://ajuda.alterdata.com.br/download/attachments/201345182/Captura%20de%20tela%202023-11-11%20223945.png?version=2&modificationDate=1699753256674&api=v2)
+<img src="/assets/logo-branco.svg">
 
 EsplinHub é uma aplicação web desenvolvida em Vue.js, focada no gerenciamento eficiente de clientes e produtos.
 
@@ -10,7 +10,7 @@ EsplinHub foi criado com o objetivo de oferecer uma interface amigável e intera
 
 ```bash
 git clone https://github.com/eduesplinio/gerenciador-vue-clientes-produtos.git
-cd seuprojeto
+cd gerenciador-vue-clientes-produtos
 npm install
 ```
 
