@@ -1,7 +1,5 @@
 # EsplinHub - Gerenciador de Clientes e Produtos
 
-<img src="/assets/logo-branco.svg">
-
 EsplinHub é uma aplicação web desenvolvida em Vue.js, focada no gerenciamento eficiente de clientes e produtos.
 
 ### Visão Geral
@@ -26,5 +24,5 @@ npm run serve
 
 Links para a documentação do projeto e para a documentação destinada aos usuários finais.
 
-- Documentação Técnica: [Link para a documentação técnica](https://esplinhubdocs-projeto.vercel.app/)
+- Documentação Técnica: [https://esplinhubdocs-projeto.vercel.app/](https://esplinhubdocs-projeto.vercel.app/)
 - Documentação para Clientes: [https://esplinhubdocs.vercel.app/](https://esplinhubdocs.vercel.app/)
